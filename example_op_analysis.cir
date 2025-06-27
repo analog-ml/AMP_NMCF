@@ -1,0 +1,15 @@
+* Simple NMOS inverter circuit - OP analysis
+
+.include 'simple_models/nmos.model'      ; Include your NMOS model here
+
+VDD vdd 0 DC 1.8                  ; Supply voltage
+VIN in 0 DC 0.9                  ; Input voltage (adjust as needed)
+M1 out in vdd vdd NMOS           ; NMOS transistor (drain, gate, source, bulk)
+
+.control
+  op                             ; Perform operating point analysis
+  wrdata logs/op_results.txt all ; Write all OP data to file in logs/
+  quit
+.endc
+
+.end
