@@ -91,6 +91,7 @@ def print_metrics(metrics: dict):
         f"gain={float(metrics['gain']):.3f}, "
         f"gain_dB={float(20*np.log10(metrics['gain'])):.3f}, "
         f"ugbw={float(metrics['ugbw']/1e6):.3f} (MHz), "
+        f"pm={float(metrics['pm']):.3f} (degrees), "
         f"power={float(metrics['power'] * 1e3):.3f} mA"
     )
 
