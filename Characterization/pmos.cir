@@ -1,0 +1,19 @@
+* PMOS VGS-ID characterization (linear region)
+.options nomod post
+.temp 27
+
+* For PMOS use negative polarity supplies/values
+VDSp pd 0 DC -0.05      ; VDS = -50 mV (drain to source)
+VGp pg 0 DC 0
+
+* PMOS device: drain gate source bulk (bulk at 0)
+M1p pd pg 0 0 pmos L=1u W=10u
+
+.model pmos PMOS (level=1 VTO=-0.7 KP=20u GAMMA=0.0 PHI=0.6)
+
+* Sweep gate from 0 -> -1.8 V
+.dc VGp 0 -1.8 -0.01
+
+.print dc I(VDSp) V(pg) V(pd)
+
+.

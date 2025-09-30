@@ -1,0 +1,25 @@
+* NMOS VGS-ID characterization (linear region)
+* Run with: ngspice nmos_vgs_id.sp or HSPICE compatible
+
+.options nomod post
+.temp 27
+
+* DC supply that sets Vds (drain to source). Positive drain, source at 0.
+VDS nd 0 DC 0.05        ; VDS = 50 mV (linear region)
+
+* Gate sweep source (will be swept by .dc)
+VG ng 0 DC 0
+
+* MOSFET: Mname Drain Gate Source Bulk Model L=W=
+M1 nd ng 0 0 nmos L=1u W=10u
+
+* Simple level=1 model (replace with foundry BSIM model for accuracy)
+.model nmos NMOS (level=1 VTO=0.7 KP=50u GAMMA=0.0 PHI=0.6)
+
+* Sweep gate from 0 -> 1.8 V in 10 mV steps
+.dc VG 0 1.8 0.01
+
+* Print the drain-source current through VDS and node voltages
+.print dc I(VDS) V(ng) V(nd)
+
+.end
