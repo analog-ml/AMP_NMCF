@@ -61,6 +61,10 @@ def parse_region_file(filepath):
 
 
 # Helper function to determine PMOS region
+# integrated circuit - MOSFET ON and OFF current - Electrical Engineering Stack Exchange
+# https://electronics.stackexchange.com/questions/191396/mosfet-on-and-off-current
+
+
 def get_pmos_region(vgs, vds, vth):
     if abs(vgs) < abs(vth):
         return 0  # cut-off
@@ -140,8 +144,11 @@ def read_region(
     return get_working_region_in_text(region_dict, device_type, seperator)
 
 
-print(
-    read_region(
-        circuit_path="Leung_NMCF.cir", region_file="Leung_NMCF_region", seperator=", "
+if __name__ == "__main__":
+    print(
+        read_region(
+            circuit_path="Leung_NMCF.cir",
+            region_file="Leung_NMCF_region",
+            seperator=", ",
+        )
     )
-)
